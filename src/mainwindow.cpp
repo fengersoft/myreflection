@@ -7,6 +7,8 @@ MainWindow::MainWindow(QWidget* parent)
 {
     ui->setupUi(this);
     showCates();
+    showSubjects();
+
 
 
 
@@ -37,6 +39,28 @@ void MainWindow::showCates()
 
     }
 
+}
+
+void MainWindow::showSubjects()
+{
+    QSqlQuery qry;
+    QString sql = "select a.*,b.name as cateName from subject a left join cate b on a.pid=b.id order by a.id";
+    sqliteDao()->sqliteWrapper()->select(sql, qry);
+    while (qry.next())
+    {
+        QListWidgetItem* item = new QListWidgetItem();
+        item->setSizeHint(QSize(ui->lvSubject->width(), 100));
+        SubjectWidget* w = new SubjectWidget(this);
+        w->setCateName(qry.value("catename").toString());
+        w->setSubject(qry.value("name").toString());
+        w->setRemark(qry.value("remark").toString());
+        w->setId(qry.value("id").toInt());
+        w->setSubjectType(qry.value("subjectType").toInt());
+        ui->lvSubject->addItem(item);
+        ui->lvSubject->setItemWidget(item, w);
+
+
+    }
 }
 
 
@@ -88,6 +112,7 @@ void MainWindow::onbtnAddTriggered(bool checked)
                                   " values (%1,'%2','%3',%4)")
                           .arg(subjectInfo.cate)
                           .arg(subjectInfo.subject).arg(subjectInfo.remark).arg(subjectInfo.subjectType);
+            qDebug() << sql;
             sqliteDao()->sqliteWrapper()->execute(sql);
 
         }

@@ -14,6 +14,7 @@ SetSubjectDialog::SetSubjectDialog(QWidget* parent) :
         ui->cbbCate->addItem(qry.value("name").toString(), qry.value("id").toInt());
 
     }
+
 }
 
 SetSubjectDialog::~SetSubjectDialog()
@@ -25,7 +26,7 @@ void SetSubjectDialog::getSubjectInfo(SubJectInfo& subjectInfo)
 {
     subjectInfo.subject = ui->edtSubject->text();
     subjectInfo.remark = ui->edtRemark->text();
-    subjectInfo.cate = ui->cbbCate->itemData(Qt::UserRole).toInt();
+    subjectInfo.cate = ui->cbbCate->currentData(Qt::UserRole).toInt();
     subjectInfo.subjectType = getSubjectType();
 
 }

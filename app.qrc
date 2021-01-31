@@ -5,5 +5,7 @@
         <file>res/subject.png</file>
         <file>res/history.png</file>
         <file>res/set.png</file>
+        <file>res/info.png</file>
+        <file>res/card.png</file>
     </qresource>
 </RCC>
