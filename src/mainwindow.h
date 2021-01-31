@@ -5,6 +5,11 @@
 #include <QAction>
 #include <QMenu>
 #include <QMessageBox>
+#include "./api/dialogs/setvaluedialog.h"
+#include "./api/sql/sqlitedao.h"
+#include <QStandardItemModel>
+#include <QListWidget>
+#include "./dialogs/setsubjectdialog.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -18,10 +23,20 @@ public:
     MainWindow(QWidget* parent = nullptr);
     ~MainWindow();
 
+    ///显示类别
+    void showCates();
+
 private slots:
     void on_btnAdd_clicked();
     void onbtnAddTriggered(bool checked = false);
+
+
+    void on_btnCate_clicked();
+
+    void on_btnSubject_clicked();
+
 private:
     Ui::MainWindow* ui;
+
 };
 #endif // MAINWINDOW_H

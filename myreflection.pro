@@ -1,4 +1,4 @@
-QT       += core gui
+QT       += core gui sql
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -16,14 +16,29 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    src/api/dialogs/setvaluedialog.cpp \
+    src/api/sql/sqldef.cpp \
+    src/api/sql/sqlitedao.cpp \
+    src/api/sql/sqlitewrapper.cpp \
+    src/dialogs/setsubjectdialog.cpp \
     src/main.cpp \
-    src/mainwindow.cpp
+    src/mainwindow.cpp \
+    src/widgets/subjectwidget.cpp
 
 HEADERS += \
-    src/mainwindow.h
+    src/api/dialogs/setvaluedialog.h \
+    src/api/sql/sqldef.h \
+    src/api/sql/sqlitedao.h \
+    src/api/sql/sqlitewrapper.h \
+    src/dialogs/setsubjectdialog.h \
+    src/mainwindow.h \
+    src/widgets/subjectwidget.h
 
 FORMS += \
-    src/mainwindow.ui
+    src/api/dialogs/setvaluedialog.ui \
+    src/dialogs/setsubjectdialog.ui \
+    src/mainwindow.ui \
+    src/widgets/subjectwidget.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

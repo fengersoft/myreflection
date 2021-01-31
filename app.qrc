@@ -1,5 +1,9 @@
 <RCC>
     <qresource prefix="/">
         <file>res/add.png</file>
+        <file>res/cate.png</file>
+        <file>res/subject.png</file>
+        <file>res/history.png</file>
+        <file>res/set.png</file>
     </qresource>
 </RCC>
