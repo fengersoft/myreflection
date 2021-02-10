@@ -23,6 +23,7 @@ SOURCES += \
     src/dialogs/setsubjectdialog.cpp \
     src/main.cpp \
     src/mainwindow.cpp \
+    src/widgets/recordwidget.cpp \
     src/widgets/subjectwidget.cpp
 
 HEADERS += \
@@ -32,12 +33,14 @@ HEADERS += \
     src/api/sql/sqlitewrapper.h \
     src/dialogs/setsubjectdialog.h \
     src/mainwindow.h \
+    src/widgets/recordwidget.h \
     src/widgets/subjectwidget.h
 
 FORMS += \
     src/api/dialogs/setvaluedialog.ui \
     src/dialogs/setsubjectdialog.ui \
     src/mainwindow.ui \
+    src/widgets/recordwidget.ui \
     src/widgets/subjectwidget.ui
 
 # Default rules for deployment.

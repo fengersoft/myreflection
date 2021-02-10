@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>400</width>
-    <height>295</height>
+    <height>271</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -98,7 +98,7 @@
       <item>
        <layout class="QHBoxLayout" name="horizontalLayout_3">
         <item>
-         <widget class="QWidget" name="" native="true">
+         <widget class="QWidget" name="widget" native="true">
           <property name="minimumSize">
            <size>
             <width>40</width>
@@ -167,13 +167,6 @@
             <widget class="QRadioButton" name="rdSbType2">
              <property name="text">
               <string>打卡</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QRadioButton" name="rdSbType3">
-             <property name="text">
-              <string>分数量化</string>
              </property>
             </widget>
            </item>

@@ -13,6 +13,9 @@
   <property name="windowTitle">
    <string>Form</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true"/>
+  </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <property name="spacing">
     <number>0</number>
@@ -27,7 +30,7 @@
     <number>6</number>
    </property>
    <property name="bottomMargin">
-    <number>0</number>
+    <number>2</number>
    </property>
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout">
@@ -155,6 +158,32 @@
          </size>
         </property>
        </spacer>
+      </item>
+      <item>
+       <widget class="QToolButton" name="btnAnswer">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>32</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>想法</string>
+        </property>
+        <property name="icon">
+         <iconset resource="../../app.qrc">
+          <normaloff>:/res/answer.png</normaloff>:/res/answer.png</iconset>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>18</width>
+          <height>18</height>
+         </size>
+        </property>
+        <property name="toolButtonStyle">
+         <enum>Qt::ToolButtonTextBesideIcon</enum>
+        </property>
+       </widget>
       </item>
       <item>
        <widget class="QToolButton" name="btnCard">

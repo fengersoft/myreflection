@@ -41,10 +41,11 @@ int SetSubjectDialog::getSubjectType()
     {
         return 2;
     }
-    else if (ui->rdSbType3->isChecked())
+    else
     {
-        return 3;
+        return 0;
     }
+
 
 }
 

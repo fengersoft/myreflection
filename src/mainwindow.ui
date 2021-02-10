@@ -6,12 +6,12 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>800</width>
+    <width>933</width>
     <height>600</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>我的反思</string>
+   <string>观己</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QVBoxLayout" name="verticalLayout">
@@ -117,6 +117,12 @@
            <height>32</height>
           </size>
          </property>
+         <property name="toolTip">
+          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;主题&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         </property>
+         <property name="whatsThis">
+          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;主题&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         </property>
          <property name="text">
           <string>...</string>
          </property>
@@ -133,7 +139,7 @@
         </widget>
        </item>
        <item>
-        <widget class="QToolButton" name="btnHistory">
+        <widget class="QToolButton" name="btnRecord">
          <property name="minimumSize">
           <size>
            <width>32</width>
@@ -145,7 +151,7 @@
          </property>
          <property name="icon">
           <iconset resource="../app.qrc">
-           <normaloff>:/res/history.png</normaloff>:/res/history.png</iconset>
+           <normaloff>:/res/content.png</normaloff>:/res/content.png</iconset>
          </property>
          <property name="iconSize">
           <size>
@@ -156,7 +162,82 @@
         </widget>
        </item>
        <item>
-        <widget class="QToolButton" name="toolButton">
+        <widget class="QToolButton" name="btnCount">
+         <property name="minimumSize">
+          <size>
+           <width>32</width>
+           <height>32</height>
+          </size>
+         </property>
+         <property name="toolTip">
+          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;统计&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         </property>
+         <property name="text">
+          <string>...</string>
+         </property>
+         <property name="icon">
+          <iconset resource="../app.qrc">
+           <normaloff>:/res/count.png</normaloff>:/res/count.png</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>24</width>
+           <height>24</height>
+          </size>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QToolButton" name="btnMenu">
+         <property name="minimumSize">
+          <size>
+           <width>32</width>
+           <height>32</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>...</string>
+         </property>
+         <property name="icon">
+          <iconset resource="../app.qrc">
+           <normaloff>:/res/menu.png</normaloff>:/res/menu.png</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>24</width>
+           <height>24</height>
+          </size>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QToolButton" name="btnOrder">
+         <property name="minimumSize">
+          <size>
+           <width>32</width>
+           <height>32</height>
+          </size>
+         </property>
+         <property name="toolTip">
+          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;排序&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         </property>
+         <property name="text">
+          <string>...</string>
+         </property>
+         <property name="icon">
+          <iconset resource="../app.qrc">
+           <normaloff>:/res/order.png</normaloff>:/res/order.png</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>24</width>
+           <height>24</height>
+          </size>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QToolButton" name="btnSet">
          <property name="minimumSize">
           <size>
            <width>32</width>
@@ -204,7 +285,7 @@
 }</string>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>3</number>
       </property>
       <widget class="QWidget" name="pageCate">
        <property name="styleSheet">
@@ -261,6 +342,62 @@
         </property>
         <item>
          <widget class="QListWidget" name="lvSubject"/>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="pageRecord">
+       <layout class="QVBoxLayout" name="verticalLayout_4">
+        <property name="leftMargin">
+         <number>0</number>
+        </property>
+        <property name="topMargin">
+         <number>0</number>
+        </property>
+        <property name="rightMargin">
+         <number>0</number>
+        </property>
+        <property name="bottomMargin">
+         <number>0</number>
+        </property>
+        <item>
+         <widget class="QListWidget" name="lvRecord"/>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="pageSet">
+       <layout class="QVBoxLayout" name="verticalLayout_5">
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_2">
+          <item>
+           <widget class="QLabel" name="label">
+            <property name="maximumSize">
+             <size>
+              <width>80</width>
+              <height>16777215</height>
+             </size>
+            </property>
+            <property name="text">
+             <string>主题：</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QComboBox" name="comboBox"/>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <spacer name="verticalSpacer">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>501</height>
+           </size>
+          </property>
+         </spacer>
         </item>
        </layout>
       </widget>

@@ -7,7 +7,9 @@ MainWindow::MainWindow(QWidget* parent)
 {
     ui->setupUi(this);
     showCates();
-    showSubjects();
+    showSubjects("where 2>1");
+    showRecords("where 2>1");
+
 
 
 
@@ -22,6 +24,7 @@ MainWindow::~MainWindow()
 
 void MainWindow::showCates()
 {
+    ui->wgtPages->setCurrentWidget(ui->pageCate);
     QSqlQuery qry;
     QString sql = "select name,id from cate order by id";
     sqliteDao()->sqliteWrapper()->select(sql, qry);
@@ -41,26 +44,78 @@ void MainWindow::showCates()
 
 }
 
-void MainWindow::showSubjects()
+void MainWindow::showSubjects(QString whereStr)
 {
+    ui->wgtPages->setCurrentWidget(ui->pageSubject);
     QSqlQuery qry;
-    QString sql = "select a.*,b.name as cateName from subject a left join cate b on a.pid=b.id order by a.id";
+    QString sql = "select a.*,b.name as cateName from subject a left join cate b on a.pid=b.id " + whereStr + " order by a.id";
     sqliteDao()->sqliteWrapper()->select(sql, qry);
+    ui->lvSubject->clear();
     while (qry.next())
     {
         QListWidgetItem* item = new QListWidgetItem();
-        item->setSizeHint(QSize(ui->lvSubject->width(), 100));
+        item->setSizeHint(QSize(ui->lvSubject->width() - 24, 100));
         SubjectWidget* w = new SubjectWidget(this);
         w->setCateName(qry.value("catename").toString());
         w->setSubject(qry.value("name").toString());
         w->setRemark(qry.value("remark").toString());
         w->setId(qry.value("id").toInt());
         w->setSubjectType(qry.value("subjectType").toInt());
+        connect(w, &SubjectWidget::onGetSubInfos, this, &MainWindow::onGetSubInfos);
         ui->lvSubject->addItem(item);
         ui->lvSubject->setItemWidget(item, w);
 
 
     }
+}
+
+void MainWindow::showRecords(QString whereStr)
+{
+    ui->wgtPages->setCurrentWidget(ui->pageRecord);
+    QString sql = "select b.name subjectName,a.subjectType,a.card,"
+                  "a.value,a.info,a.createtime  from report a left join subject"
+                  " b on a.pid=b.id " + whereStr + " order by a.createTime desc";
+    QSqlQuery qry;
+    sqliteDao()->sqliteWrapper()->select(sql, qry);
+    ui->lvRecord->clear();
+    while (qry.next())
+    {
+        int subjectType = qry.value("subjectType").toInt();
+        QListWidgetItem* item = new QListWidgetItem();
+        if (subjectType == SubjectType::stCard)
+        {
+            item->setSizeHint(QSize(ui->lvRecord->width() - 24, 120));
+        }
+        else
+        {
+            item->setSizeHint(QSize(ui->lvRecord->width(), 160));
+        }
+
+        ui->lvRecord->addItem(item);
+        RecordWidget* w = new RecordWidget(this);
+        w->setSubject(qry.value("subjectName").toString());
+        w->setCreateTime(qry.value("createtime").toDateTime());
+
+        if (subjectType == SubjectType::stCard)
+        {
+            w->setInfo("已打卡");
+        }
+        else if (subjectType == SubjectType::stInfo)
+        {
+            w->setInfo(qry.value("info").toString());
+        }
+        ui->lvRecord->setItemWidget(item, w);
+
+
+    }
+
+}
+
+void MainWindow::onGetSubInfos(int id)
+{
+    QString whereStr = QString("where a.pid=%1").arg(id);
+    showRecords(whereStr);
+
 }
 
 
@@ -125,10 +180,34 @@ void MainWindow::onbtnAddTriggered(bool checked)
 
 void MainWindow::on_btnCate_clicked()
 {
-    ui->wgtPages->setCurrentWidget(ui->pageCate);
+    showCates();
 }
 
 void MainWindow::on_btnSubject_clicked()
 {
-    ui->wgtPages->setCurrentWidget(ui->pageSubject);
+    showSubjects("where 2>1");
+}
+
+void MainWindow::on_btnRecord_clicked()
+{
+    ui->wgtPages->setCurrentWidget(ui->pageRecord);
+
+}
+
+void MainWindow::on_lvCate_itemClicked(QListWidgetItem* item)
+{
+    if (item == nullptr)
+    {
+        return;
+    }
+
+    int id = item->data(Qt::UserRole).toInt();
+    QString whereStr = QString("where a.pid=%1").arg(id);
+    showSubjects(whereStr);
+}
+
+void MainWindow::on_btnSet_clicked()
+{
+    ui->wgtPages->setCurrentWidget(ui->pageSet);
+
 }

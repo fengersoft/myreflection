@@ -64,11 +64,40 @@ int SubjectWidget::subjectType() const
 void SubjectWidget::setSubjectType(int subjectType)
 {
     m_subjectType = subjectType;
-    ui->btnCard->setHidden(m_subjectType != 2);
+    ui->btnCard->setHidden(m_subjectType != SubjectType::stCard);
+    ui->btnAnswer->setHidden(m_subjectType != SubjectType::stInfo);
+}
+
+void SubjectWidget::paintEvent(QPaintEvent* event)
+{
+    QPainter painter;
+    painter.begin(this);
+    painter.setPen(QColor(197, 197, 197));
+    painter.drawLine(0, height(), width(), height());
+    painter.end();
+
 }
 
 void SubjectWidget::on_btnCard_clicked()
 {
     QString sql = QString("insert into report(pid,card,subjectType) values (%1,1,%2)").arg(m_id).arg(m_subjectType);
     sqliteDao()->sqliteWrapper()->execute(sql);
+}
+
+void SubjectWidget::on_btnAnswer_clicked()
+{
+    QString s;
+    bool ret = setValue("输入想法", "想法", s);
+    if (ret == true)
+    {
+        QString sql = QString("insert into report(pid,info,subjectType) values (%1,'%2',%3)").arg(m_id).arg(s).arg(m_subjectType);
+        sqliteDao()->sqliteWrapper()->execute(sql);
+
+    }
+
+}
+
+void SubjectWidget::on_btnInfos_clicked()
+{
+    emit onGetSubInfos(m_id);
 }
