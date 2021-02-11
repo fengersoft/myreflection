@@ -31,6 +31,14 @@ public:
     void showSubjects(QString whereStr);
     void showRecords(QString whereStr);
     void onGetSubInfos(int id);
+    void addContextMenus();
+    void addCate();
+    void editCate();
+    void deleteCate();
+
+    void addSubject();
+    void editSubject();
+    void deleteSubject();
 
 private slots:
     void on_btnAdd_clicked();
@@ -43,12 +51,24 @@ private slots:
 
     void on_btnRecord_clicked();
 
-    void on_lvCate_itemClicked(QListWidgetItem* item);
+
 
     void on_btnSet_clicked();
 
+    void on_btnCard_clicked();
+
+    void on_btnOrder_clicked();
+    void onLvCateActionTriggerd();
+    void onLvSubjectActionTriggerd();
+
+    void on_lvCate_itemDoubleClicked(QListWidgetItem* item);
+
+    void on_lvSubject_itemDoubleClicked(QListWidgetItem* item);
+
 private:
     Ui::MainWindow* ui;
+    bool m_reportOrder;
+    QString m_recordStr;
 
 };
 #endif // MAINWINDOW_H

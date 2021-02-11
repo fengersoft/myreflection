@@ -28,17 +28,23 @@ public:
     QString cateName() const;
     void setCateName(const QString& cateName);
 
-    QString subject() const;
+    QString subject();
     void setSubject(const QString& subject);
 
-    QString remark() const;
+    QString remark() ;
     void setRemark(const QString& remark);
 
     int id();
     void setId(int id);
 
-    int subjectType() const;
+    int subjectType();
     void setSubjectType(int subjectType);
+    int cate() const;
+    void setCate(int cate);
+
+    int InfoNum() const;
+    void setInfoNum(int InfoNum);
+
 signals:
     void onGetSubInfos(int id);
 protected:
@@ -57,6 +63,8 @@ private:
     QString m_remark;
     int m_id;
     int m_subjectType;
+    int m_cate;
+    int m_InfoNum;
 };
 
 #endif // SUBJECTWIDGET_H

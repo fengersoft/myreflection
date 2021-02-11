@@ -12,5 +12,7 @@
         <file>res/count.png</file>
         <file>res/content.png</file>
         <file>res/menu.png</file>
+        <file>res/card2.png</file>
+        <file>res/num.png</file>
     </qresource>
 </RCC>

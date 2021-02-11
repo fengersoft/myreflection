@@ -125,7 +125,7 @@
             <number>0</number>
            </property>
            <item>
-            <widget class="QLabel" name="label_3">
+            <widget class="QLabel" name="lblSubjectType">
              <property name="text">
               <string>选项：</string>
              </property>
@@ -148,7 +148,7 @@
          </widget>
         </item>
         <item>
-         <widget class="QGroupBox" name="groupBox">
+         <widget class="QGroupBox" name="grpSubjectType">
           <property name="title">
            <string/>
           </property>

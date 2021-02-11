@@ -49,6 +49,29 @@ int SetSubjectDialog::getSubjectType()
 
 }
 
+void SetSubjectDialog::setSubJectInfo(SubJectInfo& subjectInfo)
+{
+    ui->edtSubject->setText(subjectInfo.subject);
+    ui->edtRemark->setText(subjectInfo.remark);
+    int m = subjectInfo.cate;
+    for (int i = 0; i < ui->cbbCate->count(); i++)
+    {
+        if (ui->cbbCate->itemData(i).toInt() == m)
+        {
+            ui->cbbCate->setCurrentIndex(i);
+            break;
+        }
+    }
+
+}
+
+void SetSubjectDialog::setSubjectTypeHide()
+{
+    ui->lblSubjectType->setHidden(true);
+    ui->grpSubjectType->setHidden(true);
+
+}
+
 void SetSubjectDialog::on_btnCancel_clicked()
 {
     reject();

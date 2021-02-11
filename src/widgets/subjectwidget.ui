@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>762</width>
-    <height>100</height>
+    <height>109</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -147,6 +147,41 @@
        <number>0</number>
       </property>
       <item>
+       <widget class="QLabel" name="lblNumIco">
+        <property name="minimumSize">
+         <size>
+          <width>24</width>
+          <height>24</height>
+         </size>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">image: url(:/res/num.png);</string>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="lblNum">
+        <property name="minimumSize">
+         <size>
+          <width>80</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">color: rgb(197, 197, 197);</string>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item>
        <spacer name="horizontalSpacer_2">
         <property name="orientation">
          <enum>Qt::Horizontal</enum>
@@ -168,7 +203,7 @@
          </size>
         </property>
         <property name="text">
-         <string>想法</string>
+         <string>添加想法</string>
         </property>
         <property name="icon">
          <iconset resource="../../app.qrc">

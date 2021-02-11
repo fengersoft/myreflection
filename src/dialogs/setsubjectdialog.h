@@ -25,6 +25,8 @@ public:
     ~SetSubjectDialog();
     void getSubjectInfo(SubJectInfo& subjectInfo);
     int getSubjectType();
+    void setSubJectInfo(SubJectInfo& subjectInfo);
+    void setSubjectTypeHide();
 private slots:
     void on_btnCancel_clicked();
 

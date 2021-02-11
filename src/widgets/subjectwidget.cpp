@@ -10,6 +10,7 @@ SubjectWidget::SubjectWidget(QWidget* parent) :
 
 SubjectWidget::~SubjectWidget()
 {
+    qDebug() << "~SubjectWidget()";
     delete ui;
 }
 
@@ -24,8 +25,9 @@ void SubjectWidget::setCateName(const QString& cateName)
     ui->lblCate->setText(m_cateName);
 }
 
-QString SubjectWidget::subject() const
+QString SubjectWidget::subject()
 {
+    m_subject = ui->lblSubject->text();
     return m_subject;
 }
 
@@ -35,8 +37,9 @@ void SubjectWidget::setSubject(const QString& subject)
     ui->lblSubject->setText(m_subject);
 }
 
-QString SubjectWidget::remark() const
+QString SubjectWidget::remark()
 {
+    m_remark = ui->lblRemark->text();
     return m_remark;
 }
 
@@ -56,8 +59,9 @@ void SubjectWidget::setId(int id)
     m_id = id;
 }
 
-int SubjectWidget::subjectType() const
+int SubjectWidget::subjectType()
 {
+
     return m_subjectType;
 }
 
@@ -100,4 +104,25 @@ void SubjectWidget::on_btnAnswer_clicked()
 void SubjectWidget::on_btnInfos_clicked()
 {
     emit onGetSubInfos(m_id);
+}
+
+int SubjectWidget::InfoNum() const
+{
+    return m_InfoNum;
+}
+
+void SubjectWidget::setInfoNum(int InfoNum)
+{
+    m_InfoNum = InfoNum;
+    ui->lblNum->setText(QString("%1").arg(InfoNum));
+}
+
+int SubjectWidget::cate() const
+{
+    return m_cate;
+}
+
+void SubjectWidget::setCate(int cate)
+{
+    m_cate = cate;
 }
