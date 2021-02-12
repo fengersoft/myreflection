@@ -300,7 +300,7 @@
 }</string>
       </property>
       <property name="currentIndex">
-       <number>3</number>
+       <number>2</number>
       </property>
       <widget class="QWidget" name="pageCate">
        <property name="styleSheet">
@@ -382,7 +382,11 @@
          <number>0</number>
         </property>
         <item>
-         <widget class="QListWidget" name="lvRecord"/>
+         <widget class="QListWidget" name="lvRecord">
+          <property name="contextMenuPolicy">
+           <enum>Qt::ActionsContextMenu</enum>
+          </property>
+         </widget>
         </item>
        </layout>
       </widget>

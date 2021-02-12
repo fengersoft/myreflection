@@ -22,6 +22,7 @@ void RecordWidget::setSubject(const QString& subject)
 {
     m_subject = subject;
     ui->lblSubject->setText(m_subject);
+
 }
 
 QDateTime RecordWidget::createTime() const
@@ -54,4 +55,30 @@ void RecordWidget::paintEvent(QPaintEvent* event)
     painter.drawLine(0, height(), width(), height());
     painter.end();
 
+}
+
+int RecordWidget::id() const
+{
+    return m_id;
+}
+
+void RecordWidget::setId(int id)
+{
+    m_id = id;
+}
+
+SubjectType RecordWidget::subjectType() const
+{
+    return m_subjectType;
+}
+
+void RecordWidget::setSubjectType(SubjectType subjectType)
+{
+    m_subjectType = subjectType;
+    ui->btnEdit->setHidden(m_subjectType != stInfo);
+}
+
+void RecordWidget::on_btnEdit_clicked()
+{
+    emit editInfo(this);
 }

@@ -33,6 +33,7 @@ public:
     void showSubjects(QString whereStr);
     void showRecords(QString whereStr);
     void onGetSubInfos(int id);
+    ///增加右键菜单
     void addContextMenus();
     void addCate();
     void editCate();
@@ -41,6 +42,9 @@ public:
     void addSubject();
     void editSubject();
     void deleteSubject();
+
+    void editRecord();
+
     void loadThemes(int i);
 
     void saveConfig();
@@ -66,14 +70,16 @@ private slots:
     void on_btnOrder_clicked();
     void onLvCateActionTriggerd();
     void onLvSubjectActionTriggerd();
-
+    void onLvRecordActionTriggerd();
     void on_lvCate_itemDoubleClicked(QListWidgetItem* item);
 
     void on_lvSubject_itemDoubleClicked(QListWidgetItem* item);
 
+
     void on_cbbTheme_currentIndexChanged(int index);
 
     void on_btnSave_clicked();
+    void onLvRecordEditInfo(RecordWidget* w);
 
 private:
     Ui::MainWindow* ui;

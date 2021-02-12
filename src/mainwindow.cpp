@@ -91,7 +91,7 @@ void MainWindow::showRecords(QString whereStr)
 
     ui->wgtPages->setCurrentWidget(ui->pageRecord);
     QString sql = "select b.name subjectName,a.subjectType,a.card,"
-                  "a.value,a.info,a.createtime  from report a left join subject"
+                  "a.value,a.info,a.createtime,a.id  from report a left join subject"
                   " b on a.pid=b.id " + whereStr + " order by a.createTime " + orderStr;
     QSqlQuery qry;
     sqliteDao()->sqliteWrapper()->select(sql, qry);
@@ -111,6 +111,7 @@ void MainWindow::showRecords(QString whereStr)
 
         ui->lvRecord->addItem(item);
         RecordWidget* w = new RecordWidget(this);
+        connect(w, &RecordWidget::editInfo, this, &MainWindow::onLvRecordEditInfo);
         w->setSubject(qry.value("subjectName").toString());
         w->setCreateTime(qry.value("createtime").toDateTime());
 
@@ -122,6 +123,8 @@ void MainWindow::showRecords(QString whereStr)
         {
             w->setInfo(qry.value("info").toString());
         }
+        w->setId(qry.value("id").toInt());
+        w->setSubjectType(SubjectType(subjectType));
         ui->lvRecord->setItemWidget(item, w);
 
 
@@ -154,6 +157,13 @@ void MainWindow::addContextMenus()
         act->setText(menus[i]);
         connect(act, &QAction::triggered, this, &MainWindow::onLvSubjectActionTriggerd);
         ui->lvSubject->addAction(act);
+    }
+    for (int i = 1; i < menus.count(); i++)
+    {
+        QAction* act = new QAction(this);
+        act->setText(menus[i]);
+        connect(act, &QAction::triggered, this, &MainWindow::onLvRecordActionTriggerd);
+        ui->lvRecord->addAction(act);
     }
 
 }
@@ -294,6 +304,25 @@ void MainWindow::deleteSubject()
     delete w;
 
 }
+
+void MainWindow::editRecord()
+{
+    QListWidgetItem* item = ui->lvRecord->currentItem();
+    if (item == nullptr)
+    {
+        return;
+    }
+
+    RecordWidget* w = static_cast<RecordWidget*>(ui->lvRecord->itemWidget(item));
+    if (w->subjectType() == SubjectType::stCard)
+    {
+        return;
+    }
+
+    onLvRecordEditInfo(w);
+
+}
+
 
 void MainWindow::loadThemes(int i)
 {
@@ -445,6 +474,22 @@ void MainWindow::onLvSubjectActionTriggerd()
 
 }
 
+void MainWindow::onLvRecordActionTriggerd()
+{
+    QAction* act = static_cast<QAction*>(sender());
+
+    if (act->text() == "修改")
+    {
+        editRecord();
+    }
+    else if (act->text() == "删除")
+    {
+        deleteSubject();
+    }
+
+
+}
+
 void MainWindow::on_lvCate_itemDoubleClicked(QListWidgetItem* item)
 {
     if (item == nullptr)
@@ -475,4 +520,23 @@ void MainWindow::on_cbbTheme_currentIndexChanged(int index)
 void MainWindow::on_btnSave_clicked()
 {
     saveConfig();
+}
+
+void MainWindow::onLvRecordEditInfo(RecordWidget* w)
+{
+    QString value = w->info();
+    bool ret = setValue("修改想法", "想法", value);
+    if (ret == true)
+    {
+
+
+        QString sql = QString("update report set info='%1' where id=%2")
+                      .arg(value).arg(w->id());
+
+
+        sqliteDao()->sqliteWrapper()->execute(sql);
+        w->setInfo(value);
+
+    }
+
 }

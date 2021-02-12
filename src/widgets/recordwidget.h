@@ -5,6 +5,7 @@
 #include "../api/sql/sqlitedao.h"
 #include <QPainter>
 #include <QDateTime>
+#include "subjectwidget.h"
 
 namespace Ui
 {
@@ -27,13 +28,25 @@ public:
 
     QString info() const;
     void setInfo(const QString& info);
+    SubjectType subjectType() const;
+    void setSubjectType(SubjectType subjectType);
+
+    int id() const;
+    void setId(int id);
+signals:
+    void editInfo(RecordWidget* w);
 protected:
     void paintEvent(QPaintEvent* event);
+private slots:
+    void on_btnEdit_clicked();
+
 private:
     Ui::RecordWidget* ui;
     QString m_subject;
     QDateTime m_createTime;
     QString m_info;
+    SubjectType m_subjectType;
+    int m_id;
 };
 
 #endif // RECORDWIDGET_H
