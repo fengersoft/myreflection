@@ -106,7 +106,7 @@ void MainWindow::showRecords(QString whereStr)
         }
         else
         {
-            item->setSizeHint(QSize(ui->lvRecord->width(), 160));
+            item->setSizeHint(QSize(ui->lvRecord->width() - 24, 160));
         }
 
         ui->lvRecord->addItem(item);
