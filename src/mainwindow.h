@@ -44,6 +44,7 @@ public:
     void deleteSubject();
 
     void editRecord();
+    void deleteRecord();
 
     void loadThemes(int i);
 

@@ -299,7 +299,7 @@ void MainWindow::deleteSubject()
     sql = "delete from report where pid not in (select id from subject)";
     sqliteDao()->sqliteWrapper()->execute(sql);
 
-    ui->lvCate->removeItemWidget(item);
+    ui->lvSubject->removeItemWidget(item);
     delete item;
     delete w;
 
@@ -320,6 +320,32 @@ void MainWindow::editRecord()
     }
 
     onLvRecordEditInfo(w);
+
+}
+
+void MainWindow::deleteRecord()
+{
+    QListWidgetItem* item = ui->lvRecord->currentItem();
+    if (item == nullptr)
+    {
+        return;
+    }
+    int ret = QMessageBox::question(this, "提示", "确定删除选中项吗?");
+    if (ret == QMessageBox::No)
+    {
+        return;
+    }
+    RecordWidget* w = static_cast<RecordWidget*>(ui->lvRecord->itemWidget(item));
+
+    int id = w->id();
+
+
+    QString sql = QString("delete from report where id=%1").arg(id);
+    sqliteDao()->sqliteWrapper()->execute(sql);
+
+    ui->lvRecord->removeItemWidget(item);
+    delete item;
+    delete w;
 
 }
 
@@ -484,7 +510,7 @@ void MainWindow::onLvRecordActionTriggerd()
     }
     else if (act->text() == "删除")
     {
-        deleteSubject();
+        deleteRecord();
     }
 
 
