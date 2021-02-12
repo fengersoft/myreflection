@@ -6,10 +6,13 @@ MainWindow::MainWindow(QWidget* parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    loadConfig();
+
     addContextMenus();
     m_reportOrder = false;
 
     showSubjects("where 2>1");
+
 
 
 
@@ -292,6 +295,38 @@ void MainWindow::deleteSubject()
 
 }
 
+void MainWindow::loadThemes(int i)
+{
+    QString path = QApplication::applicationDirPath() + "/qss/" + QString("%1.qss").arg(i);
+    QFile file(path);
+    file.open(QFile::ReadOnly);
+    QString qss = file.readAll();
+    ui->wgtToolBar->setStyleSheet(qss);
+
+
+    file.close();
+
+}
+
+void MainWindow::saveConfig()
+{
+    QSettings ini(QApplication::applicationDirPath() + "/config.ini", QSettings::IniFormat);
+    ini.beginGroup("theme");
+    ini.setValue("index", ui->cbbTheme->currentIndex());
+    ini.endGroup();
+
+}
+
+void MainWindow::loadConfig()
+{
+    QSettings ini(QApplication::applicationDirPath() + "/config.ini", QSettings::IniFormat);
+    ini.beginGroup("theme");
+    int themeIndex = ini.value("index", 0).toInt();
+    ini.endGroup();
+    ui->cbbTheme->setCurrentIndex(themeIndex);
+    emit ui->cbbTheme->currentIndexChanged(themeIndex);
+}
+
 
 void MainWindow::on_btnAdd_clicked()
 {
@@ -430,4 +465,14 @@ void MainWindow::on_lvSubject_itemDoubleClicked(QListWidgetItem* item)
     }
     SubjectWidget* w = static_cast<SubjectWidget*>(ui->lvSubject->itemWidget(item)) ;
     onGetSubInfos(w->id());
+}
+
+void MainWindow::on_cbbTheme_currentIndexChanged(int index)
+{
+    loadThemes(index);
+}
+
+void MainWindow::on_btnSave_clicked()
+{
+    saveConfig();
 }

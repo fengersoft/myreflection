@@ -12,6 +12,8 @@
 #include "./dialogs/setsubjectdialog.h"
 #include "./widgets/subjectwidget.h"
 #include "./widgets/recordwidget.h"
+#include <QFile>
+#include <QSettings>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -39,6 +41,10 @@ public:
     void addSubject();
     void editSubject();
     void deleteSubject();
+    void loadThemes(int i);
+
+    void saveConfig();
+    void loadConfig();
 
 private slots:
     void on_btnAdd_clicked();
@@ -64,6 +70,10 @@ private slots:
     void on_lvCate_itemDoubleClicked(QListWidgetItem* item);
 
     void on_lvSubject_itemDoubleClicked(QListWidgetItem* item);
+
+    void on_cbbTheme_currentIndexChanged(int index);
+
+    void on_btnSave_clicked();
 
 private:
     Ui::MainWindow* ui;
