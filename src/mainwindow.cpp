@@ -6,6 +6,12 @@ MainWindow::MainWindow(QWidget* parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    m_calender = new  FnCalender(this);
+    QHBoxLayout* lay = new QHBoxLayout();
+    ui->pageCount->setLayout(lay);
+    lay->addWidget(m_calender);
+    lay->setContentsMargins(0, 0, 0, 0);
+
     loadConfig();
 
     addContextMenus();
@@ -603,4 +609,9 @@ void MainWindow::onLvRecordAddInfo(RecordWidget* w)
 
     }
 
+}
+
+void MainWindow::on_btnCount_clicked()
+{
+    ui->wgtPages->setCurrentWidget(ui->pageCount);
 }

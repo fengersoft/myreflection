@@ -14,6 +14,7 @@
 #include "./widgets/recordwidget.h"
 #include <QFile>
 #include <QSettings>
+#include "./api/date/fncalender.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -84,11 +85,14 @@ private slots:
     void onLvRecordEditInfo(RecordWidget* w);
     void onLvRecordAddInfo(RecordWidget* w);
 
+    void on_btnCount_clicked();
+
 private:
     Ui::MainWindow* ui;
     bool m_reportOrder;
     QString m_recordStr;
     QString m_recordSql;
+    FnCalender* m_calender;
 
 };
 #endif // MAINWINDOW_H

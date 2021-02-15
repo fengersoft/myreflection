@@ -16,6 +16,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    src/api/date/fncalender.cpp \
     src/api/dialogs/setvaluedialog.cpp \
     src/api/sql/sqldef.cpp \
     src/api/sql/sqlitedao.cpp \
@@ -27,6 +28,7 @@ SOURCES += \
     src/widgets/subjectwidget.cpp
 
 HEADERS += \
+    src/api/date/fncalender.h \
     src/api/dialogs/setvaluedialog.h \
     src/api/sql/sqldef.h \
     src/api/sql/sqlitedao.h \
@@ -37,6 +39,7 @@ HEADERS += \
     src/widgets/subjectwidget.h
 
 FORMS += \
+    src/api/date/fncalender.ui \
     src/api/dialogs/setvaluedialog.ui \
     src/dialogs/setsubjectdialog.ui \
     src/mainwindow.ui \

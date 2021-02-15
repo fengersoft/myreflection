@@ -46,8 +46,18 @@
      </property>
      <property name="font">
       <font>
-       <pointsize>12</pointsize>
+       <family>微软雅黑</family>
+       <pointsize>14</pointsize>
       </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QLabel{
+}
+QLabel::hover
+{
+  
+	color: rgb(0, 0, 127);
+}</string>
      </property>
      <property name="text">
       <string>问题</string>
@@ -56,6 +66,12 @@
    </item>
    <item>
     <widget class="QTextEdit" name="edtInfo">
+     <property name="font">
+      <font>
+       <family>宋体</family>
+       <pointsize>12</pointsize>
+      </font>
+     </property>
      <property name="styleSheet">
       <string notr="true">margin-top:16px;</string>
      </property>
