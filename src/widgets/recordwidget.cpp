@@ -76,9 +76,25 @@ void RecordWidget::setSubjectType(SubjectType subjectType)
 {
     m_subjectType = subjectType;
     ui->btnEdit->setHidden(m_subjectType != stInfo);
+    ui->btnAdd->setHidden(m_subjectType != stInfo);
 }
 
 void RecordWidget::on_btnEdit_clicked()
 {
     emit editInfo(this);
+}
+
+void RecordWidget::on_btnAdd_clicked()
+{
+    emit addInfo(this);
+}
+
+int RecordWidget::pid() const
+{
+    return m_pid;
+}
+
+void RecordWidget::setPid(int pid)
+{
+    m_pid = pid;
 }

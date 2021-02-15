@@ -77,22 +77,32 @@ void MainWindow::showSubjects(QString whereStr)
 
 
 
-void MainWindow::showRecords(QString whereStr)
+void MainWindow::showRecords(QString whereStr, bool isWhere)
 {
-    if (whereStr == "")
+    QString sql;
+    if (isWhere)
     {
-        whereStr = m_recordStr;
+        if (whereStr == "")
+        {
+            whereStr = m_recordStr;
+        }
+        else
+        {
+            m_recordStr = whereStr;
+        }
+        QString orderStr = m_reportOrder == true ? "asc" : "desc";
+
+        ui->wgtPages->setCurrentWidget(ui->pageRecord);
+        sql = "select b.name subjectName,a.subjectType,a.card,"
+              "a.value,a.info,a.createtime,a.id,a.pid  from report a left join subject"
+              " b on a.pid=b.id " + whereStr + " order by a.createTime " + orderStr;
     }
     else
     {
-        m_recordStr = whereStr;
+        sql = whereStr;
     }
-    QString orderStr = m_reportOrder == true ? "asc" : "desc";
-
-    ui->wgtPages->setCurrentWidget(ui->pageRecord);
-    QString sql = "select b.name subjectName,a.subjectType,a.card,"
-                  "a.value,a.info,a.createtime,a.id  from report a left join subject"
-                  " b on a.pid=b.id " + whereStr + " order by a.createTime " + orderStr;
+    m_recordSql = sql;
+    qDebug() << m_recordSql;
     QSqlQuery qry;
     sqliteDao()->sqliteWrapper()->select(sql, qry);
     ui->lvRecord->clear();
@@ -112,6 +122,7 @@ void MainWindow::showRecords(QString whereStr)
         ui->lvRecord->addItem(item);
         RecordWidget* w = new RecordWidget(this);
         connect(w, &RecordWidget::editInfo, this, &MainWindow::onLvRecordEditInfo);
+        connect(w, &RecordWidget::addInfo, this, &MainWindow::onLvRecordAddInfo);
         w->setSubject(qry.value("subjectName").toString());
         w->setCreateTime(qry.value("createtime").toDateTime());
 
@@ -124,11 +135,18 @@ void MainWindow::showRecords(QString whereStr)
             w->setInfo(qry.value("info").toString());
         }
         w->setId(qry.value("id").toInt());
+        w->setPid(qry.value("pid").toInt());
         w->setSubjectType(SubjectType(subjectType));
         ui->lvRecord->setItemWidget(item, w);
 
 
     }
+
+}
+
+void MainWindow::refreshRecord()
+{
+    showRecords(m_recordSql, false);
 
 }
 
@@ -562,6 +580,26 @@ void MainWindow::onLvRecordEditInfo(RecordWidget* w)
 
         sqliteDao()->sqliteWrapper()->execute(sql);
         w->setInfo(value);
+
+    }
+
+}
+
+void MainWindow::onLvRecordAddInfo(RecordWidget* w)
+{
+    QString value = "";
+    bool ret = setValue("追加想法", "想法", value);
+    if (ret == true)
+    {
+
+
+        QString sql = QString("insert into report (pid,info,subjectType) values (%1,'%2',1)").arg(w->pid())
+                      .arg(value);
+
+
+        sqliteDao()->sqliteWrapper()->execute(sql);
+        refreshRecord();
+
 
     }
 

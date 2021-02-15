@@ -116,6 +116,26 @@
        </spacer>
       </item>
       <item>
+       <widget class="QToolButton" name="btnAdd">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>24</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>追加想法</string>
+        </property>
+        <property name="icon">
+         <iconset resource="../../app.qrc">
+          <normaloff>:/res/answer.png</normaloff>:/res/answer.png</iconset>
+        </property>
+        <property name="toolButtonStyle">
+         <enum>Qt::ToolButtonTextBesideIcon</enum>
+        </property>
+       </widget>
+      </item>
+      <item>
        <widget class="QToolButton" name="btnEdit">
         <property name="minimumSize">
          <size>

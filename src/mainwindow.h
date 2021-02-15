@@ -31,7 +31,8 @@ public:
     void showCates();
     ///显示主题
     void showSubjects(QString whereStr);
-    void showRecords(QString whereStr);
+    void showRecords(QString whereStr, bool isWhere = true);
+    void refreshRecord();
     void onGetSubInfos(int id);
     ///增加右键菜单
     void addContextMenus();
@@ -81,11 +82,13 @@ private slots:
 
     void on_btnSave_clicked();
     void onLvRecordEditInfo(RecordWidget* w);
+    void onLvRecordAddInfo(RecordWidget* w);
 
 private:
     Ui::MainWindow* ui;
     bool m_reportOrder;
     QString m_recordStr;
+    QString m_recordSql;
 
 };
 #endif // MAINWINDOW_H
